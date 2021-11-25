@@ -28,7 +28,7 @@ int main(void) {
 
 	do {
 		utn_getNumero(&option,
-				"Menu:\n1.Leer un archivo con los datos de libros\n2.Leer un archivo con los datos de editoriales\n3.Ordenar los libros por autor\n4.Imprimir los datos de los libros (con editorial)\n5.Informar los libros de la editorial Minotauro\n10.Salir\n",
+				"Menu:\n1.Leer un archivo con los datos de libros de datoseLibro.csv\n2.Leer un archivo con los datos de editoriales de datoseEditorial.csv\n3.Ordenar los libros por autor\n4.Imprimir los datos de los libros (con editorial)\n5.Informar los libros de la editorial Minotauro\n10.Salir\n",
 				"\n La opción ingresada no está dentro del rango solicitado\n",
 				1, 10, 2);
 
