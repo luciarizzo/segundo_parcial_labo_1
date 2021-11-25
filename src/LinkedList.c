@@ -468,7 +468,7 @@ int ll_sort(LinkedList *this, int (*pFunc)(void*, void*), int order) {
  * \param pList LinkedList* Puntero a la lista
  * \param pFunc (*pFunc) Puntero a la funcion criterio
  * \return int Retorna  NULL en caso de no poder filtrar
- 	Sino LinkedList* listaFiltrada en caso de haber podido filtrar
+ Sino LinkedList* listaFiltrada en caso de haber podido filtrar
  */
 LinkedList* ll_filter(LinkedList *this, int (*fn)(void *element)) {
 	int i;
@@ -489,33 +489,37 @@ LinkedList* ll_filter(LinkedList *this, int (*fn)(void *element)) {
 	return listaFiltrada;
 }
 
-/*
-FUNCIONES QUE HICE:
-LinkedList* ll_map(LinkedList* this, void(pFunc)(void* element)){
-		void* aux = NULL;
-
-		if(this != NULL && pFunc!=NULL)
-		{
-			for(int i=0; i<ll_len(this); i++)
-			{
-				aux = ll_get(this, i);
-				pFunc(aux);
-			}
-		}
-	return this;
-}
-*/
-/*
-int ll_count(LinkedList *this, int (*fn)(void* element)){
-	int retorno = -1;
-	void* auxElemento = NULL;
+/** \brief Mapea los elementos de la lista utilizando la funcion criterio recibida como parametro
+ * \param pList LinkedList* Puntero a la lista
+ * \param pFunc (*pFunc) Puntero a la funcion criterio
+ * \return int Retorna  NULL en caso de no poder filtrar
+ Sino LinkedList* listaLibros en caso de haber podido filtrar
+ */
+LinkedList* ll_map(LinkedList *this, int (*fn)(void *element)) {
+	eLibro *auxLibro;
+	LinkedList *listaLibrosDescuento = NULL;
 	int i;
-	if(this != NULL && fn != NULL){
-		for(i = 0; i<ll_len(this); i++){
-			auxElemento = ll_get(this, i);
-			retorno = retorno + fn(auxElemento);
+	if (this != NULL && fn != NULL && ll_len(this) > 0) {
+		listaLibrosDescuento = ll_newLinkedList();
+		for ( i = 0; i < ll_len(this); i++) {
+			auxLibro = ll_get(listaLibrosDescuento, i);
+			fn(auxLibro);
 		}
 	}
-	return retorno;
+	return listaLibrosDescuento;
 }
-*/
+
+/*
+ int ll_count(LinkedList *this, int (*fn)(void* element)){
+ int retorno = -1;
+ void* auxElemento = NULL;
+ int i;
+ if(this != NULL && fn != NULL){
+ for(i = 0; i<ll_len(this); i++){
+ auxElemento = ll_get(this, i);
+ retorno = retorno + fn(auxElemento);
+ }
+ }
+ return retorno;
+ }
+ */

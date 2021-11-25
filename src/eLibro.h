@@ -122,4 +122,11 @@ int eLibro_FiltrarPorMinotauro(void* elemento);
  */
 int eLibro_sortByAutor(void *paramUno, void *paramDos);
 
+/*
+ * \brief Evalua mediante comparacion de getters de eLibro si se le aplica o no un descuento
+ * \param void* elemento recibe parametro para ser asignado
+ * \return retorna un -1 (descendente), 1 (ascendente) si pudo obtener, 0 si no
+ */
+int eLibro_descuentoPorEditorial(void* elemento);
+
 #endif /* ELIBRO_H_ */

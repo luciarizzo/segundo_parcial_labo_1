@@ -25,10 +25,11 @@ int main(void) {
 	LinkedList 	*listaEditoriales = ll_newLinkedList();
 	LinkedList *listaLibros = ll_newLinkedList();
 	LinkedList *listaFiltrada = NULL;
+	LinkedList *listaLibrosDescuento = NULL;
 
 	do {
 		utn_getNumero(&option,
-				"Menu:\n1.Leer un archivo con los datos de libros de datoseLibro.csv\n2.Leer un archivo con los datos de editoriales de datoseEditorial.csv\n3.Ordenar los libros por autor\n4.Imprimir los datos de los libros (con editorial)\n5.Informar los libros de la editorial Minotauro\n10.Salir\n",
+				"Menu:\n1.Leer un archivo con los datos de libros de datoseLibro.csv\n2.Leer un archivo con los datos de editoriales de datoseEditorial.csv\n3.Ordenar los libros por autor\n4.Imprimir los datos de los libros (con editorial)\n5.Informar los libros de la editorial Minotauro\n6.Generar el archivo de salida mapeado.csv luego de aplicar la funcion map\n10.Salir\n",
 				"\n La opción ingresada no está dentro del rango solicitado\n",
 				1, 10, 2);
 
@@ -79,6 +80,14 @@ int main(void) {
 			if (flagPrimeraCargaLibros == 0 && flagPrimeraCargaEditoriales == 0){
 			listaFiltrada = ll_filter(listaLibros, eLibro_FiltrarPorMinotauro);
 			controller_saveAsText("datos_Filtrados.csv", listaFiltrada, listaEditoriales);
+			} else {
+				printf("\nError. Debe cargar los datos de libros primero con la opcion 1 y tambien de las editoriales con la opcion 2\n");
+			}
+			break;
+		case 6: //Listar los libros de la editorial MINOTAURO (filter)
+			if (flagPrimeraCargaLibros == 0 && flagPrimeraCargaEditoriales == 0){
+				listaLibrosDescuento = ll_map(listaLibros, eLibro_descuentoPorEditorial);
+			controller_saveAsText("mapeado.csv", listaLibrosDescuento, listaEditoriales);
 			} else {
 				printf("\nError. Debe cargar los datos de libros primero con la opcion 1 y tambien de las editoriales con la opcion 2\n");
 			}

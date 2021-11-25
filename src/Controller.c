@@ -69,6 +69,7 @@ int controller_IdEditorialToNombreEditorial(int id, char *editorialIdStr,
 	return retorno;
 }
 
+
 int controller_List_eLibro(LinkedList *listaLibros,
 		LinkedList *listaEditoriales) {
 	int retorno;
@@ -162,7 +163,7 @@ int controller_saveAsText(char *path, LinkedList *listaLibros, LinkedList *lista
 			}
 			if (retorno == 0) {
 				printf(
-						"\nSe guardaron los datos de los empleados en el archivo datos_Filtrados.csv\n");
+						"\nSe guardaron los datos en el archivo\n");
 			}
 		}
 		fclose(pFile);
@@ -170,6 +171,63 @@ int controller_saveAsText(char *path, LinkedList *listaLibros, LinkedList *lista
 
 	return retorno;
 }
+/*
+int controller_descuentoPorEditorial(LinkedList* listaLibros)
+{
+	int retorno=-1;
+	void (*pFunc)(void* element);
+	if(listaLibros!=NULL)
+	{
+		pFunc=eLibro_descuentoPorEditorial;
+		ll_map(listaLibros, pFunc);
+	}
+    return retorno;
+}
+*/
+
+/*
+int controller_descuentoLibroPorEditorial(LinkedList* listaLibros){
+	int retorno = -1;
+	void (*pFunc)(void* elemento);
+	if(listaLibros != NULL){
+		pFunc = eLibro_descuentoPorEditorial;
+		ll_map(listaLibros, pFunc);
+		retorno = 0;
+	}
+	return retorno;
+}
+*/
+
+
+
+
+/*
+int controller_descuentosLibrosPorEditorial(LinkedList* listaLibros, LinkedList* listaEditoriales){
+	int i;
+	int largoLLdeEditoriales;
+	int largoLLdeLibros;
+	eLibro *auxLibro = NULL;
+	int auxIdEditorial;
+	char editorialIdStr[1000];
+	if(listaLibros != NULL && listaEditoriales != NULL){
+		largoLLdeLibros = ll_len(listaLibros);
+		largoLLdeEditoriales = ll_len(listaEditoriales);
+		if (largoLLdeLibros > 0 && largoLLdeEditoriales > 0){
+			for(i=0; i<largoLLdeLibros; i++){
+				if(eLibro_getIdEditorial(auxLibro, &auxIdEditorial) == 0){
+					controller_IdEditorialToNombreEditorial(auxIdEditorial, editorialIdStr, listaEditoriales);
+
+				}
+
+			}
+		}
+
+	}
+
+
+}
+*/
+
 /*
  int controller_loadFromBinary(char *path, LinkedList *pArrayListEmployee) {
  int retorno;

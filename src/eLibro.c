@@ -176,7 +176,29 @@ int eLibro_FiltrarPorMinotauro(void* elemento){
 	return retorno;
 }
 
+int eLibro_descuentoPorEditorial(void* elemento){
+	int retorno = -1;
+	eLibro* auxLibro;
+	auxLibro = (eLibro*)elemento;
+	int auxPrecio;
+	int auxIdEditorial;
+	if(eLibro_getIdEditorial(auxLibro, &auxIdEditorial) == 0 && eLibro_getPrecio(auxLibro, &auxPrecio) == 0){
+		// editorial planeta id 1
+		if(auxIdEditorial == 1 && auxPrecio >= 300){
+			auxPrecio = auxPrecio-(auxPrecio*20/100);
+			eLibro_setPrecio(auxLibro, auxPrecio);
+			retorno = 0;
+		}
+		//editorial siglo xxi id 2
+		if(auxIdEditorial == 2 && auxPrecio <= 200){
+			auxPrecio = auxPrecio-(auxPrecio*10/100);
+			eLibro_setPrecio(auxLibro, auxPrecio);
+			retorno = 0;
+		}
+	}
 
+	return retorno;
+}
 
 
 /////////////////////////////////////////////////////////////////////

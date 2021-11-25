@@ -36,10 +36,16 @@ int controller_saveAsText(char* path , LinkedList* listaLibros, LinkedList *list
  */
 int controller_List_eLibro(LinkedList *listaLibros, LinkedList *listaEditoriales);
 
-
+/** \brief Toma un ID de editorial y obtiene el nombre que corresponde a ese ID
+ * \param int id ID de la editorial a conseguir el nombre
+ * \param char *editorialIdStr nombre de la editorial
+ *  param listaEditoriales LinkedList* puntero a LinkedList
+ * \return int retorna -1 si no logro listar los empleados, 0 si logra listarlo
+ */
 int controller_IdEditorialToNombreEditorial(int id, char *editorialIdStr,
 		LinkedList *listaEditoriales);
 
+//int controller_descuentoLibroPorEditorial(LinkedList* listaLibros);
 
 /////////////////////////////////////////////////////////////////////////////////////
 
