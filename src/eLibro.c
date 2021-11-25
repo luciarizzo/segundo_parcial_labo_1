@@ -170,11 +170,41 @@ int eLibro_FiltrarPorMinotauro(void* elemento){
 	auxLibro = (eLibro*)elemento;
 
 	if(auxLibro->idEditorial == 4){
-		printf("\nEntro a if de filtrar\n");
 		retorno = 0;
 	}
 
 	return retorno;
 }
 
+
+int eLibro_IdToEditorial(int id, char* editorialIdStr)
+{
+	int retorno=-1;
+	if(editorialIdStr!=NULL && id>0 && id<7)
+	{
+		retorno=0;
+		switch(id)
+		{
+		case 1:
+			strcpy(editorialIdStr,"PLANETA");
+			break;
+		case 2:
+			strcpy(editorialIdStr,"SIGLO XXI EDITORES");
+			break;
+		case 3:
+			strcpy(editorialIdStr,"PEARSON");
+			break;
+		case 4:
+			strcpy(editorialIdStr,"MINOTAURO");
+			break;
+		case 5:
+			strcpy(editorialIdStr,"SALAMANDRA");
+			break;
+		case 6:
+			strcpy(editorialIdStr,"PENGUIN BOOKS");
+			break;
+		}
+	}
+	return retorno;
+}
 

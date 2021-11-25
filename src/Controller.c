@@ -258,21 +258,21 @@ int controller_List_eLibro(LinkedList *listaLibros,
 	int retorno;
 	retorno = -1;
 	int largoLLdeLibros;
-	int largoLLdeEditoriales;
+	//int largoLLdeEditoriales;
 	int i;
-	int j;
+	//int j;
 	char auxAutor[1000];
 	char auxTitulo[1000];
 	int auxIdEditorial;
 	int auxPrecio;
 	int auxId;
-	int idEditorial;
+	//char idEditorial[1000];
 	char nombreEditorial[1000];
 	eLibro *auxLibro = NULL;
-	eEditorial *auxEditorial = NULL;
+	//eEditorial *auxEditorial = NULL;
 	if (listaLibros != NULL && listaEditoriales != NULL) {
 		largoLLdeLibros = ll_len(listaLibros);
-		largoLLdeEditoriales = ll_len(listaEditoriales);
+		//largoLLdeEditoriales = ll_len(listaEditoriales);
 		printf(
 				"------------------------------------------------------------------------------\n");
 		printf("ID		TITULO	  	AUTOR	   PRECIO	ID EDITORIAL	NOMBRE EDITORIAL\n");
@@ -285,17 +285,18 @@ int controller_List_eLibro(LinkedList *listaLibros,
 			eLibro_getIdEditorial(auxLibro, &auxIdEditorial);
 			eLibro_getTitulo(auxLibro, auxTitulo);
 			eLibro_getAutor(auxLibro, auxAutor);
-			for (j = 0; j < largoLLdeEditoriales; j++) {
-				auxEditorial = ll_get(listaEditoriales, j);
-				eEditorial_getId(auxEditorial, &idEditorial);
-				if (auxIdEditorial == idEditorial) {
-					eEditorial_getNombre(auxEditorial, nombreEditorial);
-				}
-			}
-			printf("%-2d	%-10s 	%10s	%-4d		%-3d	%-15s\n", auxId,
-					auxTitulo, auxAutor, auxPrecio, auxIdEditorial, nombreEditorial);
+			eLibro_IdToEditorial(auxIdEditorial, nombreEditorial);
+			/*for (j = 0; j < largoLLdeEditoriales; j++) {
+			 auxEditorial = ll_get(listaEditoriales, j);
+			 eEditorial_getId(auxEditorial, &idEditorial);
+			 if (auxIdEditorial == idEditorial) {
+			 eEditorial_getNombre(auxEditorial, nombreEditorial);
+			 }*/
+			printf("%-2d	%-10s 	%10s	%-4d		%-3d	%-15s\n", auxId, auxTitulo,
+					auxAutor, auxPrecio, auxIdEditorial, nombreEditorial);
 			retorno = 0;
 		}
+
 	}
 	return retorno;
 }
@@ -319,38 +320,35 @@ int controller_saveAsText(char *path, LinkedList *listaLibros) {
 	int largoLL;
 	char auxAutor[1000];
 	char auxTitulo[1000];
+	char nombreEditorial[1000];
 	int auxIdEditorial;
 	int auxPrecio;
 	int auxId;
 	eLibro *auxLibro = NULL;
 	if (path != NULL && listaLibros != NULL) {
-		printf("entro al primer if");
 		//ll_isEmpty devuelve -1 si es null, 1 si esta vacio y 0 si tiene contenido, de esta forma me avisa 1 sola vez la lectura correcta del archivo
 		FILE *pFile = fopen(path, "w");
 		if (pFile != NULL) {
-			printf("entro al segundo if");
 			largoLL = ll_len(listaLibros);
-			printf("%d", largoLL);
 			fprintf(pFile,
 					"ID,TITULO,AUTOR,PRECIO,ID EDITORIAL,NOMBRE EDITORIAL\n");
 			for (i = 0; i < largoLL; i++) {
-				printf("entro al for\n");
 				auxLibro = ll_get(listaLibros, i);
 				if (eLibro_getId(auxLibro, &auxId) == 0
 						&& eLibro_getPrecio(auxLibro, &auxPrecio) == 0
 						&& eLibro_getIdEditorial(auxLibro, &auxIdEditorial) == 0
 						&& eLibro_getAutor(auxLibro, auxAutor) == 0
-						&& eLibro_getTitulo(auxLibro, auxTitulo) == 0) {
-					printf("entro al tecer if");
-					fprintf(pFile, "%-5d		%-15s 			%4s		%-10d		%-5d 	\n", auxId,
-							auxAutor, auxTitulo, auxPrecio, auxIdEditorial);
+						&& eLibro_getTitulo(auxLibro, auxTitulo) == 0
+						&& eLibro_IdToEditorial(auxIdEditorial, nombreEditorial) == 0)
+				{
+					fprintf(pFile, "%-2d	%-10s 	%10s	%-4d		%-3d	%-10s\n", auxId,
+							auxAutor, auxTitulo, auxPrecio, auxIdEditorial, nombreEditorial);
 					retorno = 0;
-					printf("%d", retorno);
 				}
 			}
 			if (retorno == 0) {
 				printf(
-						"\nSe guardaron los datos de los empleados en el archivo data_copia.csv\n");
+						"\nSe guardaron los datos de los empleados en el archivo datos_Filtrados.csv\n");
 			}
 		}
 		fclose(pFile);

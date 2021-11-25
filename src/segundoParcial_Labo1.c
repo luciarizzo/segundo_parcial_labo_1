@@ -76,8 +76,12 @@ int main(void) {
 			break;
 
 		case 5: //Listar los libros de la editorial MINOTAURO (filter)
+			if (flagPrimeraCargaLibros == 0 && flagPrimeraCargaEditoriales == 0){
 			listaFiltrada = ll_filter(listaLibros, eLibro_FiltrarPorMinotauro);
 			controller_saveAsText("datos_Filtrados.csv", listaFiltrada);
+			} else {
+				printf("\nError. Debe cargar los datos de libros primero con la opcion 1 y tambien de las editoriales con la opcion 2\n");
+			}
 			break;
 		}
 	} while (option != 10);

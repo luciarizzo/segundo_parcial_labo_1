@@ -33,6 +33,7 @@ int eLibro_getPrecio(eLibro *this, int *precio);
 int eLibro_getIdEditorial(eLibro *this, int *idEditorial);
 int eLibro_getAutor(eLibro *this, char *autor);
 int eLibro_getTitulo(eLibro *this, char *titulo);
+int eLibro_IdToEditorial(int id, char* editorialIdStr);
 
 int eLibro_FiltrarPorMinotauro(void* elemento);
 

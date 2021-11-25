@@ -469,13 +469,11 @@ LinkedList* ll_filter(LinkedList *this, int (*fn)(void *element)) {
 	LinkedList *listaFiltrada = NULL;
 	if (this != NULL && ll_len(this) > 0) {
 		listaFiltrada = ll_newLinkedList();
-		//printf("%p", listaFiltrada);
 		if (listaFiltrada != NULL) {
 			for (i = 0; i < ll_len(this); i++) {
 				auxLibro = ll_get(this, i);
 				if (fn(auxLibro) == 0) {
 					ll_add(listaFiltrada, auxLibro);
-					printf("%s", auxLibro->titulo);
 				}
 			}
 		}
@@ -483,3 +481,34 @@ LinkedList* ll_filter(LinkedList *this, int (*fn)(void *element)) {
 
 	return listaFiltrada;
 }
+
+/*
+FUNCIONES QUE HICE:
+LinkedList* ll_map(LinkedList* this, void(pFunc)(void* element)){
+		void* aux = NULL;
+
+		if(this != NULL && pFunc!=NULL)
+		{
+			for(int i=0; i<ll_len(this); i++)
+			{
+				aux = ll_get(this, i);
+				pFunc(aux);
+			}
+		}
+	return this;
+}
+*/
+/*
+int ll_count(LinkedList *this, int (*fn)(void* element)){
+	int retorno = -1;
+	void* auxElemento = NULL;
+	int i;
+	if(this != NULL && fn != NULL){
+		for(i = 0; i<ll_len(this); i++){
+			auxElemento = ll_get(this, i);
+			retorno = retorno + fn(auxElemento);
+		}
+	}
+	return retorno;
+}
+*/
