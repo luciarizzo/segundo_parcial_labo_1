@@ -7,11 +7,11 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "LinkedList.h"
+//#include "LinkedList.h"
+#include "Controller.h"
 #include "eLibro.h"
 #include "eEditorial.h"
 #include "utn.h"
-
 
 
 eLibro* eLibros_new() {
@@ -177,6 +177,18 @@ int eLibro_FiltrarPorMinotauro(void* elemento){
 }
 
 
+
+
+/////////////////////////////////////////////////////////////////////
+/*
+ * eLibro_IdToEditorial(auxIdEditorial, nombreEditorial) == 0
+	for (j = 0; j < largoLLdeEditoriales; j++) {
+auxEditorial = ll_get(listaEditoriales, j);
+eEditorial_getId(auxEditorial, &idEditorial);
+(auxIdEditorial == idEditorial) {
+				 eEditorial_getNombre(auxEditorial, nombreEditorial);
+				 }*/
+/*
 int eLibro_IdToEditorial(int id, char* editorialIdStr)
 {
 	int retorno=-1;
@@ -207,4 +219,4 @@ int eLibro_IdToEditorial(int id, char* editorialIdStr)
 	}
 	return retorno;
 }
-
+*/

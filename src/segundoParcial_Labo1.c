@@ -14,7 +14,7 @@
 #include "LinkedList.h"
 #include "utn.h"
 #include "eLibro.h"
-#include "eEditorial.h"
+//#include "eEditorial.h"
 
 int main(void) {
 	setbuf(stdout, NULL);
@@ -78,7 +78,7 @@ int main(void) {
 		case 5: //Listar los libros de la editorial MINOTAURO (filter)
 			if (flagPrimeraCargaLibros == 0 && flagPrimeraCargaEditoriales == 0){
 			listaFiltrada = ll_filter(listaLibros, eLibro_FiltrarPorMinotauro);
-			controller_saveAsText("datos_Filtrados.csv", listaFiltrada);
+			controller_saveAsText("datos_Filtrados.csv", listaFiltrada, listaEditoriales);
 			} else {
 				printf("\nError. Debe cargar los datos de libros primero con la opcion 1 y tambien de las editoriales con la opcion 2\n");
 			}

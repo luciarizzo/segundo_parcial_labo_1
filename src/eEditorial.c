@@ -7,7 +7,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "LinkedList.h"
+//#include "LinkedList.h"
+#include "Controller.h"
 #include "eLibro.h"
 #include "eEditorial.h"
 #include "utn.h"
@@ -52,6 +53,31 @@ int eEditorial_setNombre(eEditorial *this, char *nombre) {
 	}
 	return retorno;
 }
+
+int eEditorial_IdEditorialToNombreEditorial(int id, char *editorialIdStr,
+		LinkedList *listaEditoriales) {
+	int i;
+	eEditorial *auxEditorial = NULL;
+	int idEditorial;
+	int retorno;
+	retorno = -1;
+	if (listaEditoriales != NULL && editorialIdStr != NULL) {
+		int largoLLdeEditoriales = ll_len(listaEditoriales);
+		for (i = 0; i < largoLLdeEditoriales; i++) {
+			auxEditorial = ll_get(listaEditoriales, i);
+			eEditorial_getId(auxEditorial, &idEditorial);
+			if (id == idEditorial) {
+				eEditorial_getNombre(auxEditorial, editorialIdStr);
+				retorno = 0;
+			}
+		}
+
+	}
+	return retorno;
+}
+
+
+
 
 /*
 int eLibro_setAutor(eLibro *this, char *autor) {

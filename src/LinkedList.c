@@ -3,6 +3,7 @@
 #include <string.h>
 #include "LinkedList.h"
 #include "eLibro.h"
+#include "eEditorial.h"
 
 static Node* getNode(LinkedList *this, int nodeIndex);
 static int addNode(LinkedList *this, int nodeIndex, void *pElement);
@@ -463,6 +464,12 @@ int ll_sort(LinkedList *this, int (*pFunc)(void*, void*), int order) {
 	return returnAux;
 }
 
+/** \brief Filtra los elementos de la lista utilizando la funcion criterio recibida como parametro
+ * \param pList LinkedList* Puntero a la lista
+ * \param pFunc (*pFunc) Puntero a la funcion criterio
+ * \return int Retorna  NULL en caso de no poder filtrar
+ 	Sino LinkedList* listaFiltrada en caso de haber podido filtrar
+ */
 LinkedList* ll_filter(LinkedList *this, int (*fn)(void *element)) {
 	int i;
 	eLibro *auxLibro;

@@ -1,13 +1,47 @@
 #include "LinkedList.h"
 
-/** \brief Carga los datos de los empleados desde el archivo data.csv (modo texto).
+/** \brief Carga los datos de los libros desde el archivo datoseLibro.csv (modo texto).
  * \param path char* puntero al path del archivo a cargar
- * \param pArrayListEmployee LinkedList* puntero a LinkedList
+ * \param listaLibros LinkedList* puntero a LinkedList
  * \return int devuelve 0 si la carga fue exitosa o -1 si no se pudo cargar.
  */
 int controller_loadFromTextLibros(char *path, LinkedList *listaLibros);
 
+/** \brief Carga los datos de los libros desde el archivo datoseEditorial.csv (modo texto).
+ * \param path char* puntero al path del archivo a cargar
+ * \param pArrayListEmployee LinkedList* puntero a LinkedList
+ * \return int devuelve 0 si la carga fue exitosa o -1 si no se pudo cargar.
+ */
 int controller_loadFromTextEditoriales(char *path, LinkedList *listaEditoriales);
+
+/*
+ * \brief Ordenar libros por autor
+ * \param listaLibros LinkedList* puntero a LinkedList
+ * \return int retorna -1 si no logro ordenar los empleados, 0 si logro ordenarlos
+ */
+int controller_sortLibros(LinkedList* listaLibros);
+
+/**
+ * \brief Guarda los datos de los libros en el archivo datos_Filtrados.csv (modo texto).
+ * \param path char* puntero al archivo donde guardara los datos
+ * \param listaLibros LinkedList* puntero a LinkedList
+ * \return int retorna -1 si no logro guardar los datos, 0 si los guardo
+ */
+int controller_saveAsText(char* path , LinkedList* listaLibros, LinkedList *listaEditoriales);
+
+/** \brief Listar libros
+ * \param listaLibros LinkedList* puntero a LinkedList
+ *  * \param listaEditoriales LinkedList* puntero a LinkedList
+ * \return int retorna -1 si no logro listar los empleados, 0 si logra listarlo
+ */
+int controller_List_eLibro(LinkedList *listaLibros, LinkedList *listaEditoriales);
+
+
+int controller_IdEditorialToNombreEditorial(int id, char *editorialIdStr,
+		LinkedList *listaEditoriales);
+
+
+/////////////////////////////////////////////////////////////////////////////////////
 
 /** \brief Carga los datos de los empleados desde el archivo data.csv (modo binario).
  * \param path char* puntero al path del archivo a cargar
@@ -56,26 +90,4 @@ int controller_loadFromTextEditoriales(char *path, LinkedList *listaEditoriales)
  */
 //int controller_ListEmployee(LinkedList* pArrayListEmployee);
 
-/*
- * \brief Ordenar empleados
- * \param pArrayListEmployee LinkedList* puntero a LinkedList
- * \return int retorna -1 si no logro ordenar los empleados, 0 si logro ordenarlos
- */
-int controller_sortLibros(LinkedList* listaLibros);
 
-/**
- * \brief Guarda los datos de los empleados en el archivo data.csv (modo texto).
- * \param path char* puntero al archivo donde guardara los datos
- * \param pArrayListEmployee LinkedList* puntero a LinkedList
- * \return int retorna -1 si no logro guardar los datos, 0 si los guardo
- */
-int controller_saveAsText(char* path , LinkedList* listaLibros);
-
-/** \brief Guarda los datos de los empleados en el archivo data.csv (modo binario).
- * \param path char* puntero al archivo donde guardara los datos
- * \param pArrayListEmployee LinkedList* puntero a LinkedList
- * \return int retorna -1 si no logro guardar los datos, 0 si pudo guardarlos
- */
-//int controller_saveAsBinary(char* path , LinkedList* pArrayListEmployee);
-
-int controller_List_eLibro(LinkedList *listaLibros, LinkedList *listaEditoriales);
