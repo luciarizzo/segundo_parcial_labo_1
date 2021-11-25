@@ -280,23 +280,25 @@ int controller_List_eLibro(LinkedList *listaLibros,
 				"------------------------------------------------------------------------------\n");
 		for (i = 0; i < largoLLdeLibros; i++) {
 			auxLibro = ll_get(listaLibros, i);
-			eLibro_getId(auxLibro, &auxId);
-			eLibro_getPrecio(auxLibro, &auxPrecio);
-			eLibro_getIdEditorial(auxLibro, &auxIdEditorial);
-			eLibro_getTitulo(auxLibro, auxTitulo);
-			eLibro_getAutor(auxLibro, auxAutor);
-			eLibro_IdToEditorial(auxIdEditorial, nombreEditorial);
-			/*for (j = 0; j < largoLLdeEditoriales; j++) {
-			 auxEditorial = ll_get(listaEditoriales, j);
-			 eEditorial_getId(auxEditorial, &idEditorial);
-			 if (auxIdEditorial == idEditorial) {
-			 eEditorial_getNombre(auxEditorial, nombreEditorial);
-			 }*/
-			printf("%-2d	%-10s 	%10s	%-4d		%-3d	%-15s\n", auxId, auxTitulo,
-					auxAutor, auxPrecio, auxIdEditorial, nombreEditorial);
-			retorno = 0;
-		}
+			if (eLibro_getId(auxLibro, &auxId) == 0
+					&& eLibro_getPrecio(auxLibro, &auxPrecio) == 0
+					&& eLibro_getIdEditorial(auxLibro, &auxIdEditorial) == 0
+					&& eLibro_getTitulo(auxLibro, auxTitulo) == 0
+					&& eLibro_getAutor(auxLibro, auxAutor) == 0
+					&& eLibro_IdToEditorial(auxIdEditorial, nombreEditorial)
+							== 0) {
+				/*for (j = 0; j < largoLLdeEditoriales; j++) {
+				 auxEditorial = ll_get(listaEditoriales, j);
+				 eEditorial_getId(auxEditorial, &idEditorial);
+				 if (auxIdEditorial == idEditorial) {
+				 eEditorial_getNombre(auxEditorial, nombreEditorial);
+				 }*/
+				printf("%-2d	%-10s 	%10s	%-4d		%-3d	%-15s\n", auxId, auxTitulo,
+						auxAutor, auxPrecio, auxIdEditorial, nombreEditorial);
+				retorno = 0;
+			}
 
+		}
 	}
 	return retorno;
 }
@@ -339,10 +341,11 @@ int controller_saveAsText(char *path, LinkedList *listaLibros) {
 						&& eLibro_getIdEditorial(auxLibro, &auxIdEditorial) == 0
 						&& eLibro_getAutor(auxLibro, auxAutor) == 0
 						&& eLibro_getTitulo(auxLibro, auxTitulo) == 0
-						&& eLibro_IdToEditorial(auxIdEditorial, nombreEditorial) == 0)
-				{
+						&& eLibro_IdToEditorial(auxIdEditorial, nombreEditorial)
+								== 0) {
 					fprintf(pFile, "%-2d	%-10s 	%10s	%-4d		%-3d	%-10s\n", auxId,
-							auxAutor, auxTitulo, auxPrecio, auxIdEditorial, nombreEditorial);
+							 auxTitulo, auxAutor, auxPrecio, auxIdEditorial,
+							nombreEditorial);
 					retorno = 0;
 				}
 			}

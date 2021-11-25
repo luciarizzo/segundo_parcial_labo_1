@@ -1,7 +1,7 @@
 ID,TITULO,AUTOR,PRECIO,ID EDITORIAL,NOMBRE EDITORIAL
-12	Alvarez    	 Las armas	600 		4  	MINOTAURO 
-5 	Bioy Casares 	La invención	100 		4  	MINOTAURO 
-10	Casares    	  El sueño	140 		4  	MINOTAURO 
-19	Martinez   	Santa Evita	200 		4  	MINOTAURO 
-20	Ocampo     	     Plata	150 		4  	MINOTAURO 
-8 	Sabato     	  El tunel	200 		4  	MINOTAURO 
+5 	La invención 	Bioy Casares	100 		4  	MINOTAURO 
+8 	El tunel   	    Sabato	200 		4  	MINOTAURO 
+10	El sueño   	   Casares	140 		4  	MINOTAURO 
+12	Las armas  	   Alvarez	600 		4  	MINOTAURO 
+19	Santa Evita 	  Martinez	200 		4  	MINOTAURO 
+20	Plata      	    Ocampo	150 		4  	MINOTAURO 
