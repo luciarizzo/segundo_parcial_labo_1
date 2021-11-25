@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include "LinkedList.h"
+#include "eLibro.h"
 
 static Node* getNode(LinkedList *this, int nodeIndex);
 static int addNode(LinkedList *this, int nodeIndex, void *pElement);
@@ -401,15 +402,16 @@ LinkedList* ll_subList(LinkedList *this, int from, int to) {
 	LinkedList *cloneArray = NULL;
 	void *auxpElement = NULL;
 	int i;
-	if (this != NULL && from >= 0 && to >= 0 && from < to && from < ll_len(this) && to <= ll_len(this)) {
+	if (this != NULL && from >= 0 && to >= 0 && from < to && from < ll_len(this)
+			&& to <= ll_len(this)) {
 		cloneArray = ll_newLinkedList();
-			if (cloneArray != NULL) {
-				for (i = from; i < to; i++) {
-					auxpElement = ll_get(this, i);
-					ll_add(cloneArray, auxpElement);
-				}
+		if (cloneArray != NULL) {
+			for (i = from; i < to; i++) {
+				auxpElement = ll_get(this, i);
+				ll_add(cloneArray, auxpElement);
 			}
 		}
+	}
 	return cloneArray;
 }
 
@@ -422,7 +424,7 @@ LinkedList* ll_subList(LinkedList *this, int from, int to) {
 LinkedList* ll_clone(LinkedList *this) {
 	LinkedList *cloneArray = NULL;
 	int largoLL;
-	if(this != NULL){
+	if (this != NULL) {
 		largoLL = ll_len(this);
 		cloneArray = ll_subList(this, 0, largoLL);
 	}
@@ -438,18 +440,19 @@ LinkedList* ll_clone(LinkedList *this) {
  */
 int ll_sort(LinkedList *this, int (*pFunc)(void*, void*), int order) {
 	int returnAux = -1;
-	void* auxNodoUno = NULL;
-	void* auxNodoDos = NULL;
+	void *auxNodoUno = NULL;
+	void *auxNodoDos = NULL;
 	int i;
 	int j;
 	int largoLL;
-	if(this!= NULL && pFunc != NULL && (order == 1 || order == 0)){
+	if (this != NULL && pFunc != NULL && (order == 1 || order == 0)) {
 		largoLL = ll_len(this);
-		for(i=0; i<largoLL-1; i++){
-			for(j=i+1; j<largoLL; j++){
+		for (i = 0; i < largoLL - 1; i++) {
+			for (j = i + 1; j < largoLL; j++) {
 				auxNodoUno = ll_get(this, i);
 				auxNodoDos = ll_get(this, j);
-				if(((pFunc(auxNodoUno, auxNodoDos)>0) && order == 1) || ((pFunc(auxNodoUno, auxNodoDos)<0) && order == 0)){
+				if (((pFunc(auxNodoUno, auxNodoDos) > 0) && order == 1)
+						|| ((pFunc(auxNodoUno, auxNodoDos) < 0) && order == 0)) {
 					ll_set(this, j, auxNodoUno);
 					ll_set(this, i, auxNodoDos);
 					returnAux = 0;
@@ -460,3 +463,23 @@ int ll_sort(LinkedList *this, int (*pFunc)(void*, void*), int order) {
 	return returnAux;
 }
 
+LinkedList* ll_filter(LinkedList *this, int (*fn)(void *element)) {
+	int i;
+	eLibro *auxLibro;
+	LinkedList *listaFiltrada = NULL;
+	if (this != NULL && ll_len(this) > 0) {
+		listaFiltrada = ll_newLinkedList();
+		//printf("%p", listaFiltrada);
+		if (listaFiltrada != NULL) {
+			for (i = 0; i < ll_len(this); i++) {
+				auxLibro = ll_get(this, i);
+				if (fn(auxLibro) == 0) {
+					ll_add(listaFiltrada, auxLibro);
+					printf("%s", auxLibro->titulo);
+				}
+			}
+		}
+	}
+
+	return listaFiltrada;
+}

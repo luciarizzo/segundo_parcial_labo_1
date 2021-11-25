@@ -19,10 +19,12 @@
 int main(void) {
 	setbuf(stdout, NULL);
 	int option;
-	int flagPrimeraCarga = -1;
+	int flagPrimeraCargaLibros = -1;
+	int flagPrimeraCargaEditoriales = -1;
 	char nombre[1000];
+	LinkedList 	*listaEditoriales = ll_newLinkedList();
 	LinkedList *listaLibros = ll_newLinkedList();
-	LinkedList *listaEditoriales = ll_newLinkedList();
+	LinkedList *listaFiltrada = NULL;
 
 	do {
 		utn_getNumero(&option,
@@ -35,9 +37,12 @@ int main(void) {
 			printf("\nIngrese el nombre y ruta del archivo que desea abrir: ");
 			gets(nombre);
 			if(stricmp(nombre, "datoseLibro.csv") == 0){
-				if (controller_loadFromText(nombre, listaLibros) == 0) {
-					flagPrimeraCarga = 0;
+
+				if (controller_loadFromTextLibros(nombre, listaLibros) == 0) {
+					flagPrimeraCargaLibros = 0;
 				}
+			} else {
+				printf("\nError, el nombre del archivo no es correcto\n");
 			}
 			break;
 
@@ -45,14 +50,16 @@ int main(void) {
 			printf("\nIngrese el nombre y ruta del archivo que desea abrir: ");
 			gets(nombre);
 			if(stricmp(nombre, "datoseEditorial.csv") == 0){
-				if (controller_loadFromText(nombre, listaEditoriales) == 0) {
-					flagPrimeraCarga = 0;
+				if (controller_loadFromTextEditoriales(nombre, listaEditoriales) == 0) {
+					flagPrimeraCargaEditoriales = 0;
 				}
+			} else {
+				printf("\nError, el nombre del archivo no es correcto\n");
 			}
 			break;
 
 		case 3: //Ordenar los libros por autor
-			if (flagPrimeraCarga == 0){
+			if (flagPrimeraCargaLibros == 0){
 				controller_sortLibros(listaLibros);
 			}
 			else {
@@ -61,15 +68,16 @@ int main(void) {
 			break;
 
 		case 4: //Listar los libros ----con su editorial----!!!!!!
-			if (flagPrimeraCarga == 0){
-				controller_List_eLibro(listaLibros);
+			if (flagPrimeraCargaLibros == 0 && flagPrimeraCargaEditoriales == 0){
+				controller_List_eLibro(listaLibros, listaEditoriales);
 			} else {
-				printf("\nError. Debe cargar los datos de libros primero con la opcion 1\n");
+				printf("\nError. Debe cargar los datos de libros primero con la opcion 1 y tambien de las editoriales con la opcion 2\n");
 			}
 			break;
 
 		case 5: //Listar los libros de la editorial MINOTAURO (filter)
-			controller_saveAsText("datosFiltrados.csv", listaLibros);
+			listaFiltrada = ll_filter(listaLibros, eLibro_FiltrarPorMinotauro);
+			controller_saveAsText("datos_Filtrados.csv", listaFiltrada);
 			break;
 		}
 	} while (option != 10);

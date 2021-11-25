@@ -34,6 +34,8 @@ int eLibro_getIdEditorial(eLibro *this, int *idEditorial);
 int eLibro_getAutor(eLibro *this, char *autor);
 int eLibro_getTitulo(eLibro *this, char *titulo);
 
+int eLibro_FiltrarPorMinotauro(void* elemento);
+
 int eLibro_sortByAutor(void *paramUno, void *paramDos);
 
 #endif /* ELIBRO_H_ */

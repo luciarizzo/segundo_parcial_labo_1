@@ -20,5 +20,6 @@ int parser_eLibroFromText(FILE *pFile, LinkedList *listaLibros);
  * \param pArrayListEmployee LinkedList* puntero a LinkedList
  * \return int retorna -1 si no pudo parsear o 0 si pudo parsear
  */
+int parser_eEditorialFromText(FILE *pFile, LinkedList *listaEditoriales);
 
 #endif /* PARSER_H_ */

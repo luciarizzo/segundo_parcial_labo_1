@@ -164,3 +164,17 @@ int eLibro_sortByAutor(void *paramUno, void *paramDos) {
 	return retorno;
 }
 
+int eLibro_FiltrarPorMinotauro(void* elemento){
+	int retorno = -1;
+	eLibro* auxLibro;
+	auxLibro = (eLibro*)elemento;
+
+	if(auxLibro->idEditorial == 4){
+		printf("\nEntro a if de filtrar\n");
+		retorno = 0;
+	}
+
+	return retorno;
+}
+
+

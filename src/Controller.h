@@ -5,7 +5,9 @@
  * \param pArrayListEmployee LinkedList* puntero a LinkedList
  * \return int devuelve 0 si la carga fue exitosa o -1 si no se pudo cargar.
  */
-int controller_loadFromText(char* path , LinkedList* listaLibros);
+int controller_loadFromTextLibros(char *path, LinkedList *listaLibros);
+
+int controller_loadFromTextEditoriales(char *path, LinkedList *listaEditoriales);
 
 /** \brief Carga los datos de los empleados desde el archivo data.csv (modo binario).
  * \param path char* puntero al path del archivo a cargar
@@ -76,4 +78,4 @@ int controller_saveAsText(char* path , LinkedList* listaLibros);
  */
 //int controller_saveAsBinary(char* path , LinkedList* pArrayListEmployee);
 
-int controller_List_eLibro(LinkedList *listaLibros);
+int controller_List_eLibro(LinkedList *listaLibros, LinkedList *listaEditoriales);
